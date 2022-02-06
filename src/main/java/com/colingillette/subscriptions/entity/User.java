@@ -5,15 +5,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents a user of the application.
  */
+@Entity
+@Table(name = "USER")
 @Getter
 @Setter
 @ToString
@@ -26,15 +26,35 @@ public class User {
     private String email;
 
     @ManyToMany
+    @JoinTable(
+            name = "user_queue_entry",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "entry_id")
+    )
     private List<Entry> queuedEntries;
 
     @ManyToMany
+    @JoinTable(
+            name = "user_favorite_entry",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "entry_id")
+    )
     private List<Entry> favoriteEntries;
 
     @ManyToMany
+    @JoinTable(
+            name = "user_channel",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "channel_id")
+    )
     private List<Channel> channels;
 
     @ManyToMany
+    @JoinTable(
+            name = "user_provider",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "provider_id")
+    )
     private List<Provider> providers;
 
     public User() {

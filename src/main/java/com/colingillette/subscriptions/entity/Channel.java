@@ -1,5 +1,6 @@
 package com.colingillette.subscriptions.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,8 @@ import java.util.List;
  * Represents a collection of entries.
  * Examples: GameMakers Toolkit, Markiplier (the channel), The Escapist.
  */
+@Entity
+@Table(name = "CHANNEL")
 @Getter
 @Setter
 @ToString
@@ -27,16 +30,20 @@ public class Channel {
     @Lob
     private Byte[] thumbnail;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "channels")
+    @JsonIgnore
     private List<Author> authors;
 
-    @OneToMany
+    @OneToMany(mappedBy = "channel")
+    @JsonIgnore
     private List<Entry> entries;
 
     @ManyToOne
+    @JoinColumn(name = "provider_id")
     private Provider provider;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "channels")
+    @JsonIgnore
     private List<User> subscribedUsers;
 
     public Channel() {

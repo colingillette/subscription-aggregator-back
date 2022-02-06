@@ -1,5 +1,6 @@
 package com.colingillette.subscriptions.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,8 @@ import java.util.List;
 /**
  * An entry is a specific release item. A podcast episode, YouTube video, etc.
  */
+@Entity
+@Table(name = "ENTRY")
 @Getter
 @Setter
 @ToString
@@ -30,15 +33,23 @@ public class Entry {
     private Byte[] thumbnail;
 
     @ManyToOne
+    @JoinColumn(name = "entry_id")
     private Channel channel;
 
     @ManyToMany
+    @JoinTable(
+            name = "entry_author",
+            joinColumns = @JoinColumn(name = "entry_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
     private List<Author> authors;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "queuedEntries")
+    @JsonIgnore
     private List<User> queuedUsers;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "favoriteEntries")
+    @JsonIgnore
     private List<User> favoriteUsers;
 
     public Entry() {

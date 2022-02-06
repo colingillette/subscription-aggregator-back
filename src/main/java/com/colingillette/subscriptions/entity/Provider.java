@@ -1,5 +1,6 @@
 package com.colingillette.subscriptions.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,8 @@ import java.util.List;
  * Provider represents a service provider like YouTube, Netflix, and Podcasts.
  * If applicable: Podcast groups like EarWolf, Maximum Fun, or others may be a Provider.
  */
+@Entity
+@Table(name = "PROVIDER")
 @Getter
 @Setter
 @ToString
@@ -27,13 +30,16 @@ public class Provider {
     @Lob
     private Byte[] thumbnail;
 
-    @OneToMany
+    @OneToMany(mappedBy = "provider")
+    @JsonIgnore
     private List<Channel> channels;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "providers")
+    @JsonIgnore
     private List<Author> authors;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "providers")
+    @JsonIgnore
     private List<User> subscribedUsers;
 
     public Provider() {

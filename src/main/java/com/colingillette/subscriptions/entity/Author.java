@@ -1,14 +1,12 @@
 package com.colingillette.subscriptions.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +15,8 @@ import java.util.List;
  * Represents a real person who is a contributor/creator for an entry or channel.
  * Examples: Markiplier, Yahtzee, Michael Babaro.
  */
+@Entity
+@Table(name = "AUTHOR")
 @Getter
 @Setter
 @ToString
@@ -32,13 +32,24 @@ public class Author {
     @Lob
     private Byte[] thumbnail;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "authors")
+    @JsonIgnore
     private List<Entry> entries;
 
     @ManyToMany
+    @JoinTable(
+            name = "author_channel",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "channel_id")
+    )
     private List<Channel> channels;
 
     @ManyToMany
+    @JoinTable(
+            name = "author_provider",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "provider_id")
+    )
     private List<Provider> providers;
 
     public Author() {
