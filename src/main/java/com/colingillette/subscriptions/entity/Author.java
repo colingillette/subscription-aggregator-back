@@ -7,29 +7,33 @@ import lombok.ToString;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a user of the application.
+ * Represents a real person who is a contributor/creator for an entry or channel.
+ * Examples: Markiplier, Yahtzee, Michael Babaro.
  */
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
-public class User {
+public class Author {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String email;
+    private String name;
+    private String description;
+    private LocalDateTime lastEntryRelease;
+    @Lob
+    private Byte[] thumbnail;
 
     @ManyToMany
-    private List<Entry> queuedEntries;
-
-    @ManyToMany
-    private List<Entry> favoriteEntries;
+    private List<Entry> entries;
 
     @ManyToMany
     private List<Channel> channels;
@@ -37,33 +41,31 @@ public class User {
     @ManyToMany
     private List<Provider> providers;
 
-    public User() {
+    public Author() {
         super();
-        this.queuedEntries = new ArrayList<>();
-        this.favoriteEntries = new ArrayList<>();
+        this.entries = new ArrayList<>();
         this.channels = new ArrayList<>();
         this.providers = new ArrayList<>();
     }
 
-    public User(String email) {
+    public Author(String name) {
         this();
-        this.email = email;
+        this.name = name;
     }
 
-    public void addQueuedEntry(Entry entry) {
-        this.queuedEntries.add(entry);
+    public Author(String name, String description, LocalDateTime timeStamp) {
+        this();
+        this.name = name;
+        this.description = description;
+        this.lastEntryRelease = timeStamp;
     }
 
-    public boolean removeQueuedEntry(Entry entry) {
-        return this.queuedEntries.remove(entry);
+    public void addEntry(Entry entry) {
+        this.entries.add(entry);
     }
 
-    public void addFavoriteEntry(Entry entry) {
-        this.favoriteEntries.add(entry);
-    }
-
-    public boolean removeFavoriteEntry(Entry entry) {
-        return this.favoriteEntries.remove(entry);
+    public boolean removeEntry(Entry entry) {
+        return this.entries.remove(entry);
     }
 
     public void addChannel(Channel channel) {
