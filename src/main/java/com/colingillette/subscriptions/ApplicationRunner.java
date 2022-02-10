@@ -1,6 +1,7 @@
 package com.colingillette.subscriptions;
 
 import com.colingillette.subscriptions.models.*;
+import com.colingillette.subscriptions.models.Queue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -23,13 +24,12 @@ public class ApplicationRunner implements CommandLineRunner {
         mongoTemplate.dropCollection(Channel.class);
         mongoTemplate.dropCollection(Entry.class);
         mongoTemplate.dropCollection(Provider.class);
-        mongoTemplate.dropCollection(User.class);
+        mongoTemplate.dropCollection(Queue.class);
 
         List<Author> authors = getAuthors();
         List<Channel> channels = getChannels();
         List<Entry> entries = getEntries();
         List<Provider> providers = getProviders();
-        List<User> users = getUsers();
         Random ran = new Random();
 
         for (Entry entry : entries) {
@@ -39,19 +39,15 @@ public class ApplicationRunner implements CommandLineRunner {
             entry.setChannel(channels.get(ran.nextInt(channels.size())));
         }
 
-        for (User user : users) {
-            user.setSubscribedChannels(Arrays.asList(channels.get(ran.nextInt(channels.size())),
-                    channels.get(ran.nextInt(channels.size()))));
-            user.setFavoriteEntries(Arrays.asList(entries.get(ran.nextInt(entries.size()))));
-            user.setQueuedEntries(Arrays.asList(entries.get(ran.nextInt(entries.size())),
-                    entries.get(ran.nextInt(entries.size()))));
-        }
+        List<Queue> queues = getQueues(entries, ran, 5);
 
         mongoTemplate.insertAll(providers);
         mongoTemplate.insertAll(channels);
         mongoTemplate.insertAll(authors);
         mongoTemplate.insertAll(entries);
-        mongoTemplate.insertAll(users);
+        mongoTemplate.insertAll(queues);
+
+        System.out.println("Application Started...");
     }
 
     private List<Author> getAuthors() {
@@ -99,18 +95,15 @@ public class ApplicationRunner implements CommandLineRunner {
         );
     }
 
-    private List<User> getUsers() {
-        return Arrays.asList(
-                new User("ttest@gmail.com"),
-                new User("testtest@yahoo.com"),
-                new User("test3@outlook.com"),
-                new User("tstest@gmail.com"),
-                new User("ttt@yahoo.com"),
-                new User("testing@gmail.com"),
-                new User("t365@outlook.com"),
-                new User("loremipsum@gmail.com"),
-                new User("forty33@yahoo.com"),
-                new User("testingtest@outlook.com")
-        );
+    private List<Queue> getQueues(List<Entry> entries, Random ran, int length) {
+        List<Queue> qList = new ArrayList<>();
+
+        for (int i = 0; i < length; i++) {
+            Queue q = new Queue(entries.get(ran.nextInt(entries.size())));
+            q.setTimeStamp(LocalDateTime.now().minusMinutes(i));
+            qList.add(q);
+        }
+
+        return qList;
     }
 }

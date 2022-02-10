@@ -3,6 +3,7 @@ package com.colingillette.subscriptions.models;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,11 +20,14 @@ public class Entry {
     @Id
     private String id;
 
+    @TextIndexed
     private String name;
+
     private String description;
     private int length;
     private LocalDateTime releaseTimeStamp;
     private MediaType mediaType;
+    private boolean favorite;
 
     @DBRef
     private List<Author> authors;

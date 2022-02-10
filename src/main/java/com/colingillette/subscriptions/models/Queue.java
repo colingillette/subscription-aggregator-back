@@ -3,32 +3,34 @@ package com.colingillette.subscriptions.models;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.TextIndexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Document("authors")
+@Document("queues")
 @Getter
 @Setter
-public class Author {
+public class Queue {
 
     @Id
     private String id;
 
-    @TextIndexed
-    private String name;
+    private LocalDateTime timeStamp;
 
-    private String bio;
+    @DBRef
+    private Entry entry;
 
-    public Author() {
+    public Queue() {
         super();
         this.id = UUID.randomUUID().toString();
+        this.timeStamp = LocalDateTime.now();
     }
 
-    public Author(String name, String bio) {
+    public Queue(Entry entry) {
         this();
-        this.name = name;
-        this.bio = bio;
+        this.entry = entry;
     }
+
 }
