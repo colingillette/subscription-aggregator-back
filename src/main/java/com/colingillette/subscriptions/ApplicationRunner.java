@@ -28,10 +28,10 @@ public class ApplicationRunner implements CommandLineRunner {
 
         List<Author> authors = getAuthors();
         List<Channel> channels = getChannels();
-        List<Entry> entries = getEntries();
         List<Provider> providers = getProviders();
         Random ran = new Random();
 
+        List<Entry> entries = getEntries(ran);
         for (Entry entry : entries) {
             entry.setAuthors(Arrays.asList(authors.get(ran.nextInt(authors.size())),
                     authors.get(ran.nextInt(authors.size()))));
@@ -69,21 +69,21 @@ public class ApplicationRunner implements CommandLineRunner {
         );
     }
 
-    private List<Entry> getEntries() {
+    private List<Entry> getEntries(Random ran) {
         return Arrays.asList(
-                new Entry("Audio 1", "Test Description Audio 1.", 45, LocalDateTime.now(), MediaType.Audio),
-                new Entry("Audio 2", "Test Description Audio 2.", 64, LocalDateTime.now(), MediaType.Audio),
-                new Entry("Audio 3", "Test Description Audio 3.", 47, LocalDateTime.now(), MediaType.Audio),
-                new Entry("Audio 4", "Test Description Audio 4.", 39, LocalDateTime.now(), MediaType.Audio),
-                new Entry("Text 1", "Test Description Text 1.", 13, LocalDateTime.now(), MediaType.Text),
-                new Entry("Text 2", "Test Description Text 2.", 7, LocalDateTime.now(), MediaType.Text),
-                new Entry("Text 3", "Test Description Text 3.", 6, LocalDateTime.now(), MediaType.Text),
-                new Entry("Text 4", "Test Description Text 4.", 18, LocalDateTime.now(), MediaType.Text),
-                new Entry("Text 5", "Test Description Text 5.", 14, LocalDateTime.now(), MediaType.Text),
-                new Entry("Video 1", "Test Description Video 1.", 22, LocalDateTime.now(), MediaType.Video),
-                new Entry("Video 2", "Test Description Video 2.", 9, LocalDateTime.now(), MediaType.Video),
-                new Entry("Video 3", "Test Description Video 3.", 38, LocalDateTime.now(), MediaType.Video),
-                new Entry("Video 4", "Test Description Video 4.", 16, LocalDateTime.now(), MediaType.Video)
+                new Entry("Audio 1", "Test Description Audio 1.", 45, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000)),
+                new Entry("Audio 2", "Test Description Audio 2.", 64, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000)),
+                new Entry("Audio 3", "Test Description Audio 3.", 47, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000)),
+                new Entry("Audio 4", "Test Description Audio 4.", 39, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000)),
+                new Entry("Text 1", "Test Description Text 1.", 13, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
+                new Entry("Text 2", "Test Description Text 2.", 7, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
+                new Entry("Text 3", "Test Description Text 3.", 6, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
+                new Entry("Text 4", "Test Description Text 4.", 18, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
+                new Entry("Text 5", "Test Description Text 5.", 14, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
+                new Entry("Video 1", "Test Description Video 1.", 22, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000)),
+                new Entry("Video 2", "Test Description Video 2.", 9, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000)),
+                new Entry("Video 3", "Test Description Video 3.", 38, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000)),
+                new Entry("Video 4", "Test Description Video 4.", 16, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000))
         );
     }
 

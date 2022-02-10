@@ -44,7 +44,7 @@ public class EntryController {
         entry.setLength(newEntry.getLength());
         entry.setMediaType(newEntry.getMediaType());
         entry.setReleaseTimeStamp(newEntry.getReleaseTimeStamp());
-        entry.setFavorite(newEntry.isFavorite());
+        entry.setViews(newEntry.getViews());
         entry.setChannel(newEntry.getChannel());
         entry.setProvider(newEntry.getProvider());
         entry.setAuthors(newEntry.getAuthors());

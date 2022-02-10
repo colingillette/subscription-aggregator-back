@@ -27,7 +27,7 @@ public class Entry {
     private int length;
     private LocalDateTime releaseTimeStamp;
     private MediaType mediaType;
-    private boolean favorite;
+    private long views;
 
     @DBRef
     private List<Author> authors;
@@ -45,12 +45,13 @@ public class Entry {
         this.mediaType = MediaType.Other;
     }
 
-    public Entry(String name, String description, int length, LocalDateTime releaseTimeStamp, MediaType type) {
+    public Entry(String name, String description, int length, LocalDateTime releaseTimeStamp, MediaType type, long views) {
         this();
         this.name = name;
         this.description = description;
         this.length = length;
         this.releaseTimeStamp = releaseTimeStamp;
         this.mediaType = type;
+        this.views = views;
     }
 }
