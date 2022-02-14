@@ -13,6 +13,7 @@ public class QueueController {
     @Autowired
     QueueRepository queueRepository;
 
+    @CrossOrigin
     @GetMapping("/queues")
     public List<Queue> all() {
         return queueRepository.findAllByOrderByTimeStampDesc();
