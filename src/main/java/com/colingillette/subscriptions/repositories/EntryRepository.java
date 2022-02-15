@@ -9,4 +9,6 @@ import java.util.List;
 public interface EntryRepository extends MongoRepository<Entry, String> {
 
     List<Entry> findByMediaType(MediaType type);
+
+    List<Entry> findByFavorite(boolean favorite);
 }

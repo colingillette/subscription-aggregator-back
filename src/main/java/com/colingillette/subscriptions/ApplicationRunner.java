@@ -71,19 +71,19 @@ public class ApplicationRunner implements CommandLineRunner {
 
     private List<Entry> getEntries(Random ran) {
         return Arrays.asList(
-                new Entry("Audio 1", "Test Description Audio 1.", 45, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000)),
-                new Entry("Audio 2", "Test Description Audio 2.", 64, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000)),
-                new Entry("Audio 3", "Test Description Audio 3.", 99, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000)),
-                new Entry("Audio 4", "Test Description Audio 4.", 39, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000)),
-                new Entry("Text 1", "Test Description Text 1.", 88, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
-                new Entry("Text 2", "Test Description Text 2.", 97, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
-                new Entry("Text 3", "Test Description Text 3.", 62, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
-                new Entry("Text 4", "Test Description Text 4.", 18, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
-                new Entry("Text 5", "Test Description Text 5.", 143, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000)),
-                new Entry("Video 1", "Test Description Video 1.", 22, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000)),
-                new Entry("Video 2", "Test Description Video 2.", 90, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000)),
-                new Entry("Video 3", "Test Description Video 3.", 38, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000)),
-                new Entry("Video 4", "Test Description Video 4.", 167, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000))
+                new Entry("Audio 1", "Test Description Audio 1.", 45, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000), true),
+                new Entry("Audio 2", "Test Description Audio 2.", 64, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000), false),
+                new Entry("Audio 3", "Test Description Audio 3.", 99, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000), true),
+                new Entry("Audio 4", "Test Description Audio 4.", 39, LocalDateTime.now(), MediaType.Audio, ran.nextInt(54000), false),
+                new Entry("Text 1", "Test Description Text 1.", 88, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000), true),
+                new Entry("Text 2", "Test Description Text 2.", 97, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000), false),
+                new Entry("Text 3", "Test Description Text 3.", 62, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000), true),
+                new Entry("Text 4", "Test Description Text 4.", 18, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000), false),
+                new Entry("Text 5", "Test Description Text 5.", 143, LocalDateTime.now(), MediaType.Text, ran.nextInt(54000), true),
+                new Entry("Video 1", "Test Description Video 1.", 22, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000), true),
+                new Entry("Video 2", "Test Description Video 2.", 90, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000), false),
+                new Entry("Video 3", "Test Description Video 3.", 38, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000), true),
+                new Entry("Video 4", "Test Description Video 4.", 167, LocalDateTime.now(), MediaType.Video, ran.nextInt(54000), false)
         );
     }
 

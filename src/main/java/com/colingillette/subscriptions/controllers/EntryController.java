@@ -30,6 +30,11 @@ public class EntryController {
         return entryRepository.findByMediaType(type);
     }
 
+    @GetMapping("/entries/favorites")
+    public List<Entry> findByFavorite() {
+        return entryRepository.findByFavorite(true);
+    }
+
     @PostMapping("/entries")
     public Entry create(@RequestBody Entry entry) {
         return entryRepository.insert(entry);

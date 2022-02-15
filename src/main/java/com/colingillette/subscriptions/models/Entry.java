@@ -28,6 +28,7 @@ public class Entry {
     private LocalDateTime releaseTimeStamp;
     private MediaType mediaType;
     private long views;
+    private boolean favorite;
 
     @DBRef
     private List<Author> authors;
@@ -43,9 +44,10 @@ public class Entry {
         this.id = UUID.randomUUID().toString();
         this.authors = new ArrayList<>();
         this.mediaType = MediaType.Other;
+        this.favorite = false;
     }
 
-    public Entry(String name, String description, int length, LocalDateTime releaseTimeStamp, MediaType type, long views) {
+    public Entry(String name, String description, int length, LocalDateTime releaseTimeStamp, MediaType type, long views, boolean favorite) {
         this();
         this.name = name;
         this.description = description;
@@ -53,5 +55,6 @@ public class Entry {
         this.releaseTimeStamp = releaseTimeStamp;
         this.mediaType = type;
         this.views = views;
+        this.favorite = favorite;
     }
 }
