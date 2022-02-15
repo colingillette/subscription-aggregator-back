@@ -30,6 +30,7 @@ public class EntryController {
         return entryRepository.findByMediaType(type);
     }
 
+    @CrossOrigin
     @GetMapping("/entries/favorites")
     public List<Entry> findByFavorite() {
         return entryRepository.findByFavorite(true);
