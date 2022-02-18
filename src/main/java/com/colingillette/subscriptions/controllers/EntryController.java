@@ -52,7 +52,6 @@ public class EntryController {
         entry.setReleaseTimeStamp(newEntry.getReleaseTimeStamp());
         entry.setViews(newEntry.getViews());
         entry.setChannel(newEntry.getChannel());
-        entry.setProvider(newEntry.getProvider());
         entry.setAuthors(newEntry.getAuthors());
 
         return entryRepository.save(entry);

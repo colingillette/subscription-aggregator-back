@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.TextIndexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
@@ -23,15 +24,19 @@ public class Channel {
     private String uri;
     private boolean subscribed;
 
+    @DBRef
+    private Provider provider;
+
     public Channel() {
         super();
         this.id = UUID.randomUUID().toString();
     }
 
-    public Channel(String name, String description, String uri) {
+    public Channel(String name, String description, String uri, boolean subscribed) {
         this();
         this.name = name;
         this.description = description;
         this.uri = uri;
+        this.subscribed = subscribed;
     }
 }

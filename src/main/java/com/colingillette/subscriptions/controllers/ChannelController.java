@@ -23,6 +23,12 @@ public class ChannelController {
         return channelRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
+    @CrossOrigin
+    @GetMapping("/channels/subscribed")
+    public List<Channel> allSubscribed() {
+        return channelRepository.findBySubscribedOrderByName(true);
+    }
+
     @PostMapping("/channels")
     public Channel create(@RequestBody Channel channel) {
         return channelRepository.insert(channel);
@@ -36,6 +42,7 @@ public class ChannelController {
         channel.setDescription(newChannel.getDescription());
         channel.setUri(newChannel.getUri());
         channel.setSubscribed(newChannel.isSubscribed());
+        channel.setProvider(newChannel.getProvider());
 
         return channelRepository.save(channel);
     }

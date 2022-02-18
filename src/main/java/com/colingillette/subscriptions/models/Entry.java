@@ -36,9 +36,6 @@ public class Entry {
     @DBRef
     private Channel channel;
 
-    @DBRef
-    private Provider provider;
-
     public Entry() {
         super();
         this.id = UUID.randomUUID().toString();

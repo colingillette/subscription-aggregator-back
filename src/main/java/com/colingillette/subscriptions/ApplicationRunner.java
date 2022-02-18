@@ -31,11 +31,14 @@ public class ApplicationRunner implements CommandLineRunner {
         List<Provider> providers = getProviders();
         Random ran = new Random();
 
+        for (Channel channel : channels) {
+            channel.setProvider(providers.get(ran.nextInt(providers.size())));
+        }
+
         List<Entry> entries = getEntries(ran);
         for (Entry entry : entries) {
             entry.setAuthors(Arrays.asList(authors.get(ran.nextInt(authors.size())),
                     authors.get(ran.nextInt(authors.size()))));
-            entry.setProvider(providers.get(ran.nextInt(providers.size())));
             entry.setChannel(channels.get(ran.nextInt(channels.size())));
         }
 
@@ -62,10 +65,10 @@ public class ApplicationRunner implements CommandLineRunner {
 
     private List<Channel> getChannels() {
         return Arrays.asList(
-                new Channel("Markiplier Channel", "Markliplier's Channel", "https://youtube.com/markiplier"),
-                new Channel("The Escapist", "Video Game and Movie Review", "https://youtube.com/escapist"),
-                new Channel("Software Developers Audio Blog", "Podcast about software development", "https://podcast.com/dev"),
-                new Channel("Business Writes", "Blog about business stuff", "https://medium.com/business")
+                new Channel("Software Developers Audio Blog", "Podcast about software development", "https://podcast.com/dev", true),
+                new Channel("Markiplier Channel", "Markliplier's Channel", "https://youtube.com/markiplier", true),
+                new Channel("The Escapist", "Video Game and Movie Review", "https://youtube.com/escapist", false),
+                new Channel("Business Writes", "Blog about business stuff", "https://medium.com/business", false)
         );
     }
 
